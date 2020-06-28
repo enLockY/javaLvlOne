@@ -5,7 +5,10 @@ public class Main {
         task3();
         task4();
         task5();
-        task6();
+        int [] arr = {1, 1, 1, 2, 1};
+        System.out.println(task6 (arr));
+
+//        task7();
 
     }
     static void task1 (){
@@ -79,38 +82,18 @@ public class Main {
         System.out.print("Минимальный элемент и его индекс: " + minX + " " + minIndex + ".");
         System.out.println(" Максимальный элемент и его индекс: " + maxX + " " + maxIndex + ".");
     }
-    static void task6 (){
-        int [] arr = {1, 1, 1, 2, 1};
-//        int sumLeft = 0;
-//        int sumRight = 0;
+    static boolean task6 (int [] arr){
+        int sumLeft = 0;
         for (int i = 0; i < arr.length; i++) {
+                sumLeft += arr[i];
+                int sumRight = 0;
+                for (int j = arr.length-1; j > i; j--) {
+                        sumRight += arr[j];
+                }
+                if (sumLeft == sumRight) {
+                    return true;
+                }
+            }
+        return false;
         }
-            if (arr[0] == arr[1] + arr[2] + arr[3] + arr[4]) {
-                System.out.println("Огонь! - true");
-            }if (arr[0] + arr[1] == arr[2] + arr[3] + arr[4]) {
-                System.out.println("Огонь! - true");
-            }if (arr[0] + arr[1] + arr[2] == arr[3] + arr[4]) {
-                System.out.println("Огонь! - true");
-            }if (arr[0] + arr[1] + arr[2] + arr[3] == arr[4]) {
-                System.out.println("Огонь! - true");
-        }
-// Оставлю это тут, чтобы вечером вернуться к решению.             
-//            sumLeft = sumLeft + arr[i];
-//            sumRight = sumRight + arr[j];
-//            System.out.println(sumLeft);
-//            System.out.println("            " + sumRight);
-//            for (int a = 0; a < arr.length; a++) {
-//            sumRight = sumRight + arr[j];
-//                if (sumLeft == sumRight) {
-//                    System.out.println("Огонь!");
-//                }
-//            }
-//            for (int a=0; a < arr.length; a++) {
-//                System.out.println(sumLeft);
-//            }
-    }
-    static void task7 (){
-    //в процессе
-    }
-
 }
