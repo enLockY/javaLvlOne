@@ -1,104 +1,136 @@
-
 import java.util.Random;
 import java.util.Scanner;
-public class MainClass {
-    public static int SIZE = 3;
-    public static int DOTS_TO_WIN = 3;
-    public static final char DOT_EMPTY = '•';
-    public static final char DOT_X = 'X';
-    public static final char DOT_O = 'O';
-    public static char[][] map;
-    public static Scanner sc = new Scanner(System.in);
-    public static Random rand = new Random();
-    public static void main(String[] args) {
-        initMap();
-        printMap();
+
+public class Main {
+    public static int sizeField = 5;
+    public static int winDot = 4;
+    public static char dotEmpty = '-';
+    public static char dotPlayer = 'X';
+    public static char dotComp = 'O';
+    public static char [] [] map;
+    public static Scanner scanner = new Scanner(System.in);
+    public static Random random = new Random();
+    public static void main (String args []) {
+        System.out.println("Добро пожаловать!");
+        System.out.println("Сыграем в крестики-нолики!");
+        mapInit();
+        mapPrint();
         while (true) {
-            humanTurn();
-            printMap();
-            if (checkWin(DOT_X)) {
-                System.out.println("Победил человек");
+            playerMove();
+            mapPrint();
+            if (fullMap()){
+                System.out.println("Ничья!");
                 break;
             }
-            if (isMapFull()) {
-                System.out.println("Ничья");
+            if (checkWin(dotPlayer)){
+                System.out.println("Игрок победил!");
                 break;
             }
-            aiTurn();
-            printMap();
-            if (checkWin(DOT_O)) {
-                System.out.println("Победил Искуственный Интеллект");
+            compMove();
+            mapPrint();
+            if (fullMap()){
+                System.out.println("Ничья!");
                 break;
             }
-            if (isMapFull()) {
-                System.out.println("Ничья");
+            if (checkWin(dotComp)){
+                System.out.println("Копьютер победил!");
                 break;
             }
         }
-        System.out.println("Игра закончена");
     }
-    public static boolean checkWin(char symb) {
-        if(map[0][0] == symb && map[0][1] == symb && map[0][2] == symb) return true;
-        if(map[1][0] == symb && map[1][1] == symb && map[1][2] == symb) return true;
-        if (map[2][0] == symb && map[2][1] == symb && map[2][2] == symb) return true;
-        if (map[0][0] == symb && map[1][0] == symb && map[2][0] == symb) return true;
-        if (map[0][1] == symb && map[1][1] == symb && map[2][1] == symb) return true;
-        if (map[0][2] == symb && map[1][2] == symb && map[2][2] == symb) return true;
-        if (map[0][0] == symb && map[1][1] == symb && map[2][2] == symb) return true;
-        if (map[2][0] == symb && map[1][1] == symb && map[0][2] == symb) return true;
+    public static void mapInit () {
+        map = new char[sizeField][sizeField];
+        for (int i = 0; i <sizeField ; i++) {
+            for (int j = 0; j <sizeField ; j++) {
+                map [i] [j] = dotEmpty;
+            }
+        }
+    }
+    public static void mapPrint() {
+        System.out.println("==Upading==");
+            for (int i = 0; i <= sizeField ; i++) {
+                System.out.print(i + " ");
+            }
+            System.out.println();
+            for (int i = 0; i < sizeField ; i++) {
+                System.out.print(i + 1 + " ");
+                for (int j = 0; j <sizeField ; j++) {
+                    System.out.print(map [i] [j] + " ");
+                }
+                System.out.println();
+            }
+        }
+    public static void playerMove() {
+        int x, y;
+        do {
+            System.out.println(String.format("Введите координаты хода в формате X, Y (от 1 до %s). Х=", sizeField));
+            x = scanner.nextInt () - 1;
+            System.out.println(String.format("Введите координаты хода в формате X, Y (от 1 до %s). Y=", sizeField));
+            y = scanner.nextInt () - 1;
+        }
+        while (!checkPlayerMove(x, y));
+        map [x] [y] = dotPlayer;
+    }
+    public static boolean checkPlayerMove (int x, int y) {
+        if ( x < 0 || x >= sizeField || y < 0 || y >= sizeField) {
+            System.out.println(String.format("Поля X=%s, Y=%s не существует, введите заново:", x+1, y+1));
+            return false;
+        }
+        if (map [x][y] == dotEmpty) return true;
+        System.out.println(String.format("Поле X=%s, Y=%s уже занято!", x+1,y+1));
         return false;
     }
-    public static boolean isMapFull() {
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                if (map[i][j] == DOT_EMPTY) return false;
+    public static void compMove() {
+        int x, y;
+        do {
+            x = random.nextInt(sizeField);
+            y = random.nextInt(sizeField);
+        }
+        while (!checkCompMove(x, y));
+        map [x] [y] = dotComp;
+    }
+    public static boolean checkCompMove (int x, int y) {
+        if (map [x][y] == dotEmpty) return true;
+        return false;
+    }
+    public static boolean fullMap () {
+        for (int i = 0; i <sizeField ; i++) {
+            for (int j = 0; j <sizeField ; j++) {
+                if (map [i] [j] == dotEmpty) return false;
             }
         }
         return true;
     }
-    public static void aiTurn() {
-        int x, y;
-        do {
-            x = rand.nextInt(SIZE);
-            y = rand.nextInt(SIZE);
-        } while (!isCellValid(x, y));
-        System.out.println("Компьютер походил в точку " + (x + 1) + " " + (y + 1));
-        map[y][x] = DOT_O;
-    }
-    public static void humanTurn() {
-        int x, y;
-        do {
-            System.out.println("Введите координаты в формате X Y");
-            x = sc.nextInt() - 1;
-            y = sc.nextInt() - 1;
-        } while (!isCellValid(x, y)); // while(isCellValid(x, y) == false)
-        map[y][x] = DOT_X;
-    }
-    public static boolean isCellValid(int x, int y) {
-        if (x < 0 || x >= SIZE || y < 0 || y >= SIZE) return false;
-        if (map[y][x] == DOT_EMPTY) return true;
+    public static boolean checkWinLanes (char x, int offsetX, int offsetY) {
+        boolean cols, rows;
+        for (int col=offsetX; col<winDot+offsetX; col++) {
+            cols = true;
+            rows = true;
+            for (int row=offsetY; row<winDot+offsetY; row++) {
+                cols &= (map[col][row] == x);
+                rows &= (map[row][col] == x);
+            }
+            if (cols || rows) return true;
+        }
         return false;
     }
-    public static void initMap() {
-        map = new char[SIZE][SIZE];
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                map[i][j] = DOT_EMPTY;
-            }
+    public static boolean checkWinDiagonal (char x, int offsetX, int offsexY) {
+        boolean toright, toleft;
+        toright = true;
+        toleft = true;
+        for (int i=offsetX; i<winDot+offsetX; i++) {
+                toright &= (map[i][i] == x);
+                toleft &= (map[5-i-1][i] == x);
         }
+        if (toright || toleft) return true;
+        return false;
     }
-    public static void printMap() {
-        for (int i = 0; i <= SIZE; i++) {
-            System.out.print(i + " ");
-        }
-        System.out.println();
-        for (int i = 0; i < SIZE; i++) {
-            System.out.print((i + 1) + " ");
-            for (int j = 0; j < SIZE; j++) {
-                System.out.print(map[i][j] + " ");
+    public static boolean checkWin(char x) {
+        for (int col=0; col<2; col++) {
+            for (int row=0; row<2; row++) {
+                if (checkWinLanes(x, col, row) || checkWinDiagonal(x, col, row)) return true;
             }
-            System.out.println();
         }
-        System.out.println();
+        return false;
     }
 }
