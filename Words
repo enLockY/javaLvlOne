@@ -29,9 +29,7 @@ public class Main {
                 } else break;
             }
             if (!win) {
-                for (int i = printWord.length()-1; i < 15; i++){
-                    System.out.print("#");
-                }
+                    System.out.print("###############");
                 System.out.println();
                 System.out.println("Не верно! Введите заново:");
             }
