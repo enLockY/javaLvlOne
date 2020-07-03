@@ -12,24 +12,27 @@ public class Main {
         String compX = words [compRandomIndex];
         System.out.printf("Загаданное слово: %s\n",compX);
         Scanner scanner = new Scanner(System.in);
-        int a = 0;
+        String printWord = "";
+        boolean win = false;
+        boolean isProceed = true;
         do {
-            String playerX = scanner.next();
-            for (int i = 0; i < compX.length(); i++) {
+            for (int i = 0; i <compX.length(); i++) {
+                String playerX = scanner.next();
                 if (i < playerX.length() && playerX.charAt(i) == compX.charAt(i)) {
-                    if (i == compX.length() - 1 && i == playerX.length() - 1) {
-                        System.out.println("Победа");
+                    printWord += playerX.charAt(i);
+                    System.out.print(playerX.charAt(i));
+                    if (i == compX.length()-1 && i == playerX.length()-1){
+                        System.out.println("------Победа");
+                        win = true;
                     }
                 } else break;
             }
-            for (int j = 0; j < compX.length(); j++) {
-                if (j < playerX.length() && playerX.charAt(j) == compX.charAt(j)) {
-                    System.out.print(compX.charAt(j));
-                } else break;
+            if (!win && printWord.length() != 0) {
+                for (int i = printWord.length()-1; i < 15; i++){
+                    System.out.print("#");
+                }
+                isProceed = false;
             }
-            System.out.println("*************");
-            System.out.println("Введите еще раз");
-            a = 1;
-        }while (a==1);
+        } while (isProceed = true);
     }
 }
