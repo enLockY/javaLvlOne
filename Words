@@ -1,0 +1,38 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class Main {
+    public static void main (String args []) {
+        task2 ();
+    }
+    public static void task2 (){
+        System.out.println("Компьютер загадал одно из следующих слов: \"apple\", \"orange\", \"lemon\", \n\"banana\", \"apricot\", \"avocado\", \"broccoli\", \"carrot\", \"cherry\", \"garlic\", \n\"grape\", \"melon\", \"leak\", \"kiwi\", \"mango\", \"mushroom\", \"nut\", \"olive\", \n\"pea\", \"peanut\", \"pear\", \"pepper\", \"pineapple\", \"pumpkin\", \"potato\". \nПопробуйте угадать какое! Введите его в консоль:");
+        String [] words = {"apple", "orange", "lemon", "banana", "apricot", "avocado", "broccoli", "carrot", "cherry", "garlic", "grape", "melon", "leak", "kiwi", "mango", "mushroom", "nut", "olive", "pea", "peanut", "pear", "pepper", "pineapple", "pumpkin", "potato"};
+        Random random = new Random();
+        int compRandomIndex = random.nextInt(words.length);
+        String compX = words [compRandomIndex];
+        Scanner scanner = new Scanner(System.in);
+        String printWord = "";
+        boolean win = false;
+        boolean isProceed = true;
+        do {
+            String playerX = scanner.next();
+            for (int i = 0; i <compX.length(); i++) {
+                if (i < playerX.length() && playerX.charAt(i) == compX.charAt(i)) {
+                    printWord += playerX.charAt(i);
+                    System.out.print(playerX.charAt(i));
+                    if (i == compX.length()-1 && i == playerX.length()-1){
+                        System.out.println(" - Это оно! Победа");
+                        win = true;
+                        isProceed = false;
+                    }
+                } else break;
+            }
+            if (!win) {
+                    System.out.print("###############");
+                System.out.println();
+                System.out.println("Не верно! Введите заново:");
+            }
+        } while (isProceed);
+    }
+}
