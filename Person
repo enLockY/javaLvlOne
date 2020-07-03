@@ -1,0 +1,21 @@
+public class Person {
+    public String fullName;
+    public String position;
+    public String email;
+    public long telefonN;
+    public int salary;
+    public int age;
+
+    public Person(String fullName, String position, String email, long telefonN, int salary, int age) {
+        this.fullName = fullName;
+        this.position = position;
+        this.email = email;
+        this.telefonN = telefonN;
+        this.salary = salary;
+        this.age = age;
+    }
+
+    public void info() {
+        System.out.println(String.format("[Person] ФИО: %s, Должность: %s, e-mail: %s, Телефон: %s, Зар.плата: %s, Возраст: age %s", fullName, position, email, telefonN, salary, age));
+    }
+}

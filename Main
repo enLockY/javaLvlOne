@@ -1,0 +1,15 @@
+public class Main {
+    public static void main(String args[]) {
+        Person[] persArray = new Person[5];
+        persArray[0] = new Person("Petrov Petr Petrovich", "Manager", "petrov@mail.ru", 8452433443L, 30000, 30);
+        persArray[1] = new Person("Ivanov Ivan Ivanovich", "Director", "ivanov@mail.ru", 8452433442L, 300000, 40);
+        persArray[2] = new Person("Joplin Janis Janisovna", "Top manager", "joplin@mail.ru", 8452433441L, 35000, 50);
+        persArray[3] = new Person("Morrison Jim Jimovich", "Manager", "morrison@mail.ru", 8452433448L, 30000, 27);
+        persArray[4] = new Person("Reed Lou Lou", "Manager", "loulou@mail.ru", 8452433446L, 30000, 100);
+        for (int i = 0; i <persArray.length ; i++) {
+            if (persArray[i].age > 40) {
+                persArray[i].info();
+            }
+        }
+    }
+}
