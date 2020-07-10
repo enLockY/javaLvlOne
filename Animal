@@ -1,0 +1,8 @@
+public abstract class Animal {
+    protected String tip;
+
+    public abstract void run (int distanceOfRun);
+    public abstract void swim (int distanceOfSwim);
+    public abstract void jump (double heightOfJump);
+
+}
