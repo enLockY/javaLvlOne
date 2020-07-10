@@ -1,0 +1,38 @@
+public class Cat extends Animal {
+    private String name;
+    private int maxDistanceRun;
+    private int maxDistanceSwim;
+    private double maxHeightJump;
+
+    protected Cat(String name, int maxDistanceRun, int maxDistanceSwim, double maxHeightJump) {
+        super.tip = "Кошка";
+        this.name = name;
+        this.maxDistanceRun = maxDistanceRun;
+        this.maxDistanceSwim = 0;
+        this.maxHeightJump = maxHeightJump;
+    }
+
+    @Override
+    public void run(int distanceOfRun) {
+        System.out.printf("%s %s, побежела на %s метров...  ", tip, name, distanceOfRun);
+        if (distanceOfRun <= maxDistanceRun) {
+            System.out.printf("%s метров пробежала успешно!  true\n", distanceOfRun);
+        } else System.out.printf("%s метров оказалось слишком много, она задохнулась!  false\n", distanceOfRun);
+    }
+
+    @Override
+    public void swim(int distanceOfSwim) {
+        System.out.printf("%s %s, поплыла на %s метров...  ", tip, name, distanceOfSwim);
+        if (distanceOfSwim <= maxDistanceSwim) {
+            System.out.printf("%s метров... Она вальяжно махнула хвостом по водной глади и пошла по своим делам!  true\n", distanceOfSwim);
+        } else System.out.printf("Кошка не умеет плавать, она утонула!  false\n", distanceOfSwim);
+    }
+
+    @Override
+    public void jump(double heightOfJump) {
+        System.out.printf("%s %s, сиганула на %s метров...  ", tip, name, heightOfJump);
+        if (heightOfJump <= maxHeightJump) {
+            System.out.printf("На %s метров запрыгнула!  true\n", heightOfJump);
+        } else System.out.printf("%s метров оказалось слишком много, сломала хвост!  false\n", heightOfJump);
+    }
+}
