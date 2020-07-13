@@ -1,0 +1,23 @@
+public class Cat {
+    private String name;
+    private int appetite;
+    private boolean isFed;
+
+    public Cat(String name, int appetite) {
+        this.name = name;
+        this.appetite = appetite;
+        isFed = false;
+    }
+
+    public void eat (Plate plate) {
+    boolean isDone = plate.reduce(appetite);
+    if (isDone) {
+        System.out.printf("%s покормлен!\n", name);
+        isFed = true;
+    }
+    else {
+        System.out.printf("%s остался голодным!\n", name);
+        isFed = false;
+    }
+    }
+}
