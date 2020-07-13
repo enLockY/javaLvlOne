@@ -1,0 +1,34 @@
+public class Plate {
+    private  int capacity;
+    private int size;
+
+    public Plate(int capacity, int size) {
+        this.capacity = capacity;
+        if (size > capacity) {
+            System.out.printf("Слишком много еды. Максимум в этой тарелке: %s. Остальное просыпалось! \n", capacity);
+            this.size = capacity;
+        }
+        else {
+            this.size = size;
+        }
+    }
+
+    public boolean reduce (int requestedSize) {
+        if (requestedSize > size) {
+            System.out.printf ("Недостаточно еды в миске! Вы хотите дать: %s, еды в миске вместимостью %s, осталось %s.\n", requestedSize, capacity, size);
+            return false;
+        }
+        size -= requestedSize;
+        return true;
+    }
+
+    public void addFood (int size) {
+        if (size > this.capacity) {
+            System.out.printf("Слишком много еды! Наполнили до %s, остальное просыпалось!\n", this.capacity);
+            this.size = capacity;
+        }
+        else {
+            this.size = size;
+        }
+    }
+}

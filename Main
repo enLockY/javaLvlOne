@@ -1,0 +1,16 @@
+public class Main {
+    public static void main(String args[]) {
+        Cat cat1 = new Cat ("Барсик", 60);
+        Cat cat2 = new Cat ("Чарлик", 40);
+        Cat cat3 = new Cat ("Куня", 10);
+        Plate plate = new Plate(100, 110);
+
+        Cat [] cats = {cat1, cat2, cat3};
+        for (int i = 0; i <cats.length ; i++) {
+            cats[i].eat(plate);
+        }
+        plate.addFood(110);
+        cat3.eat(plate);
+
+    }
+}
